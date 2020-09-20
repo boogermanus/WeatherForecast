@@ -2,27 +2,27 @@
     <p>Search for your Location to add a forecast</p>
     <form>
         <div class="form-group row">
-            <div class="col-sm-12">
+            <div class="col-sm-10">
                 <label for="input-address">Address</label>
                 <input type="text" id="input-address" class="form-control" aria-describedby="input-address-help">
-                <small id="input-address-help" class="form-text text-muted">For Example: 123 Sesame St. Boston, MA,
+                <small id="input-address-help" class="form-text text-muted">For Example: 123 Sesame St., Boston, MA,
                     88888</small>
             </div>
         </div>
         <h3>OR</h3>
         <div class="form-group row">
-            <label for="input-longitude" class="col-sm-2 col-form-label">Longitude</label>
+            <label for="input-longitude" class="col-sm-1 col-form-label">Longitude</label>
             <div class="col-sm-4        ">
                 <input type="number" id="input-longitude" class="form-control">
             </div>
-            <label for="input-latitude" class="col-sm-2 col-form-label">Latitude</label>
+            <label for="input-latitude" class="col-sm-1 col-form-label">Latitude</label>
             <div class="col-sm-4">
                 <input type="number" id="input-latitude" class="form-control">
             </div>
         </div>
         <div class="for-group row">
             <div class="col-sm-4">
-                <button class="btn btn-primary">Search</button>
+                <button mat-raised-button color="primary">Search</button>
             </div>
         </div>
     </form>
