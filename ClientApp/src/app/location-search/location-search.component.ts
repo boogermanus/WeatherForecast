@@ -64,5 +64,6 @@ export class LocationSearchComponent implements OnInit {
 
   public async search(): Promise<void> {
     const data = await this.locationSearchService.searchAddress(this.address.value);
+    console.log(data);
   }
 }
