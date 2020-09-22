@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatButtonToggleChange } from '@angular/material';
+import { LocationSearchService } from '../services/location-search.service';
 
 @Component({
   selector: 'app-location-search',
@@ -24,18 +25,19 @@ export class LocationSearchComponent implements OnInit {
       Validators.min(-180)
     ]));
 
-  get getAddressInvalid(): boolean {
+  public get getAddressInvalid(): boolean {
     return this.address.enabled && !this.address.valid && this.address.touched;
   }
 
-  get latitudeInvalid(): boolean {
+  public get latitudeInvalid(): boolean {
     return this.latitude.enabled && !this.latitude.valid && this.latitude.touched;
   }
 
-  get longitudeInvalid(): boolean {
+  public get longitudeInvalid(): boolean {
     return this.longitude.enabled && !this.longitude.valid && this.longitude.touched;
   }
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private locationSearchService: LocationSearchService) {
     this.form = this.formBuilder.group({
       address: this.address,
       latitude: this.latitude,
@@ -43,12 +45,12 @@ export class LocationSearchComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.latitude.disable();
     this.longitude.disable();
   }
 
-  buttonToggle(event: MatButtonToggleChange): void {
+  public buttonToggle(event: MatButtonToggleChange): void {
     if (event.value === 'address') {
       this.address.enable();
       this.latitude.disable();
@@ -58,5 +60,9 @@ export class LocationSearchComponent implements OnInit {
       this.latitude.enable();
       this.longitude.enable();
     }
+  }
+
+  public async search(): Promise<void> {
+    const data = await this.locationSearchService.searchAddress(this.address.value);
   }
 }

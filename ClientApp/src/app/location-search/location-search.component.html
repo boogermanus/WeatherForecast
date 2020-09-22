@@ -10,7 +10,7 @@
             </mat-button-toggle-group>
         </div>
     </div>
-    <form [formGroup]="form" class="mt-2">
+    <form [formGroup]="form" class="mt-2" (ngSubmit)="search()">
         <div class="form-group row">
             <div class="col-sm-12">
                 <label for="input-address">Address</label>
