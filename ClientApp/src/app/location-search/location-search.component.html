@@ -1,24 +1,36 @@
 <div>
-    <p>Search for your Location to add a forecast</p>
-    <form [formGroup]="form">
+    <div class="row mt-1">
+        <p class="col-sm-8">Search for your Location, by Address or Latitude/Longitude to add a forecast</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <mat-button-toggle-group value="address" (change)="buttonToggle($event)" >
+                <mat-button-toggle value="address">Address</mat-button-toggle>
+                <mat-button-toggle value="latlong">Latitude/Longitude</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div>
+    <form [formGroup]="form" class="mt-2">
         <div class="form-group row">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <label for="input-address">Address</label>
-                <input [formControl]="address" type="text" id="input-address" class="form-control" aria-describedby="input-address-help">
+                <input [formControl]="address" type="text" id="input-address" class="form-control"
+                    aria-describedby="input-address-help">
                 <small id="input-address-help" class="form-text text-muted">For Example: 123 Sesame St., Boston, MA,
                     88888</small>
                 <label *ngIf="getAddressInvalid" class="alert alert-danger">Address is required</label>
             </div>
         </div>
-        <h5>OR</h5>
         <div class="form-group row">
-            <label for="input-latitude" class="col-sm-1 col-form-label">Latitude</label>
+            <label for="input-latitude" class="col-sm-2 col-form-label">Latitude</label>
             <div class="col-sm-4">
                 <input [formControl]="latitude" type="number" id="input-latitude" class="form-control">
+                <label class="alert alert-danger" *ngIf="latitudeInvalid">Invalid Latitude</label>
             </div>
-            <label for="input-longitude" class="col-sm-1 col-form-label">Longitude</label>
-            <div class="col-sm-4        ">
+            <label for="input-longitude" class="col-sm-2 col-form-label">Longitude</label>
+            <div class="col-sm-4">
                 <input [formControl]="longitude" type="number" id="input-longitude" class="form-control">
+                <label class="alert alert-danger" *ngIf="longitudeInvalid">Invalid Longtidue</label>
             </div>
         </div>
         <div class="for-group row">

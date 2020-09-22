@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatButtonToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-location-search',
@@ -24,9 +25,15 @@ export class LocationSearchComponent implements OnInit {
     ]));
 
   get getAddressInvalid(): boolean {
-    return !this.address.valid && this.address.touched
-    // this is dangerous
-      && !this.longitude.touched && !this.latitude.touched;
+    return this.address.enabled && !this.address.valid && this.address.touched;
+  }
+
+  get latitudeInvalid(): boolean {
+    return this.latitude.enabled && !this.latitude.valid && this.latitude.touched;
+  }
+
+  get longitudeInvalid(): boolean {
+    return this.longitude.enabled && !this.longitude.valid && this.longitude.touched;
   }
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
@@ -37,6 +44,19 @@ export class LocationSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.latitude.disable();
+    this.longitude.disable();
   }
 
+  buttonToggle(event: MatButtonToggleChange): void {
+    if (event.value === 'address') {
+      this.address.enable();
+      this.latitude.disable();
+      this.longitude.disable();
+    } else {
+      this.address.disable();
+      this.latitude.enable();
+      this.longitude.enable();
+    }
+  }
 }
