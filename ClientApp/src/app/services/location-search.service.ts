@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { resolve } from 'dns';
+import { IPoint } from '../interfaces/ipoint';
 import { LocationApiService } from './location-api.service';
+import { WeatherDataService } from './weather-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationSearchService {
 
-  constructor(private locationApiService: LocationApiService) { }
+  constructor(private locationApiService: LocationApiService,
+              private weatherDataSerive: WeatherDataService) { }
 
-  public async searchAddress(address: string): Promise<any> {
+  public async searchAddress(address: string): Promise<IPoint> {
     const data = await this.locationApiService.get(address);
     const matches = data.result.addressMatches;
-    if (matches.length === 0) {
-      return Promise.resolve(null);
-    }
+    const firstMatch = matches[0];
+    return this.weatherDataSerive.getPoints(firstMatch.coordinates.y, firstMatch.coordinates.x);
 
-    return Promise.resolve(matches[0]);
   }
 
   public searchLatitudeLongitude(latitude: number, longitude: number): void {
