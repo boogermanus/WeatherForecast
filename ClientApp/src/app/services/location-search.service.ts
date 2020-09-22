@@ -9,13 +9,13 @@ import { WeatherDataService } from './weather-data.service';
 export class LocationSearchService {
 
   constructor(private locationApiService: LocationApiService,
-              private weatherDataSerive: WeatherDataService) { }
+              private weatherDataService: WeatherDataService) { }
 
   public async searchAddress(address: string): Promise<IPoint> {
     const data = await this.locationApiService.get(address);
     const matches = data.result.addressMatches;
     const firstMatch = matches[0];
-    return this.weatherDataSerive.getPoints(firstMatch.coordinates.y, firstMatch.coordinates.x);
+    return this.weatherDataService.getPoints(firstMatch.coordinates.y, firstMatch.coordinates.x);
 
   }
 

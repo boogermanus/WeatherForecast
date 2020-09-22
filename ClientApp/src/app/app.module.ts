@@ -12,6 +12,7 @@ import { LocationSearchComponent } from './location-search/location-search.compo
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { ForecastComponent } from './forecast/forecast.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MaterialModule } from './material.module';
     NavMenuComponent,
     HomeComponent,
     FetchDataComponent,
-    LocationSearchComponent
+    LocationSearchComponent,
+    ForecastComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
