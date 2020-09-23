@@ -15,7 +15,7 @@
             <div class="col-sm-12">
                 <label for="input-address">Address</label>
                 <input [formControl]="address" type="text" id="input-address" class="form-control"
-                    aria-describedby="input-address-help">
+                    aria-describedby="input-address-help" (keyup)="addressSearchError = false">
                 <small id="input-address-help" class="form-text text-muted">For Example: 123 Sesame St., Boston, MA,
                     88888</small>
                 <label *ngIf="getAddressInvalid" class="alert alert-danger">Address is required</label>

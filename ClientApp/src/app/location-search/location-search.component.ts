@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatButtonToggleChange } from '@angular/material';
+import { IPoint } from '../interfaces/ipoint';
 import { LocationSearchService } from '../services/location-search.service';
 
 @Component({
@@ -39,6 +40,7 @@ export class LocationSearchComponent implements OnInit {
   public get longitudeInvalid(): boolean {
     return this.longitude.enabled && !this.longitude.valid && this.longitude.touched;
   }
+
   constructor(private formBuilder: FormBuilder,
     private locationSearchService: LocationSearchService) {
     this.form = this.formBuilder.group({
@@ -83,20 +85,20 @@ export class LocationSearchComponent implements OnInit {
 
     this.addressSearchError = false;
     this.latLongSearchError = false;
-
+    let data = null;
     if (!this.address.disabled) {
-      await this.addressSearch();
+      data = await this.addressSearch();
     }
     else {
-      await this.latLongSearch();
+      data = await this.latLongSearch();
     }
 
+    console.log(data);
   }
 
-  private async addressSearch() {
+  private async addressSearch(): Promise<IPoint> {
     try {
-      const data = await this.locationSearchService.searchAddress(this.address.value);
-      console.log(data);
+      return await this.locationSearchService.searchAddress(this.address.value);
     }
     catch (e) {
       console.log(`search address error ${e}`);
@@ -104,11 +106,10 @@ export class LocationSearchComponent implements OnInit {
     }
   }
 
-  private async latLongSearch() {
+  private async latLongSearch(): Promise<IPoint> {
     try {
-      const data = await this.locationSearchService.searchLatitudeLongitude(
+      return await this.locationSearchService.searchLatitudeLongitude(
         this.latitude.value, this.longitude.value);
-      console.log(data);
     }
     catch (e) {
       console.log(`search latitude/longitude error: ${JSON.stringify(e)}`);

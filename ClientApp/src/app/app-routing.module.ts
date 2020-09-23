@@ -10,7 +10,7 @@ import { ForecastComponent } from './forecast/forecast.component';
 const routes: Route[] = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'locationsearch', component: LocationSearchComponent},
-  { path: 'forecast/:cwa/:grid', component: ForecastComponent},
+  { path: 'forecast/:office/:station/:grid', component: ForecastComponent},
   { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
 ];
 @NgModule({
