@@ -108,6 +108,7 @@ export class LocationSearchComponent implements OnInit {
     try {
       const data = await this.locationSearchService.searchLatitudeLongitude(
         this.latitude.value, this.longitude.value);
+      console.log(data);
     }
     catch (e) {
       console.log(`search latitude/longitude error: ${JSON.stringify(e)}`);
