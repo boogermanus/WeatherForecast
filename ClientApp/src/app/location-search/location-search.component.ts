@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatButtonToggleChange } from '@angular/material';
+import { Router } from '@angular/router';
 import { IPoint } from '../interfaces/ipoint';
 import { LocationSearchService } from '../services/location-search.service';
 
@@ -42,7 +43,8 @@ export class LocationSearchComponent implements OnInit {
   }
 
   constructor(private formBuilder: FormBuilder,
-    private locationSearchService: LocationSearchService) {
+              private locationSearchService: LocationSearchService,
+              private router: Router) {
     this.form = this.formBuilder.group({
       address: this.address,
       latitude: this.latitude,
@@ -85,7 +87,7 @@ export class LocationSearchComponent implements OnInit {
 
     this.addressSearchError = false;
     this.latLongSearchError = false;
-    let data = null;
+    let data: IPoint = null;
     if (!this.address.disabled) {
       data = await this.addressSearch();
     }
@@ -93,7 +95,7 @@ export class LocationSearchComponent implements OnInit {
       data = await this.latLongSearch();
     }
 
-    console.log(data);
+    this.router.navigate(['/forecast', data.cwa, data.radarStation, `${data.gridX},${data.girdY}`]);
   }
 
   private async addressSearch(): Promise<IPoint> {

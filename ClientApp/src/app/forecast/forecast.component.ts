@@ -8,13 +8,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ForecastComponent implements OnInit {
 
+  route = '';
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    const cwa = this.activatedRoute.snapshot.params['cwa'];
+    const office = this.activatedRoute.snapshot.params['office'];
     const grid = this.activatedRoute.snapshot.params['grid'];
+    const station = this.activatedRoute.snapshot.params['station'];
 
-    console.log(`${cwa}/${grid}`);
+    this.route = `${office}/${station}/${grid}`;
   }
 
 }
