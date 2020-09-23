@@ -85,25 +85,33 @@ export class LocationSearchComponent implements OnInit {
     this.latLongSearchError = false;
 
     if (!this.address.disabled) {
-      try {
-        const data = await this.locationSearchService.searchAddress(this.address.value);
-        console.log(data);
-      }
-      catch (e) {
-        console.log(`search address error ${e}`);
-        this.addressSearchError = true;
-      }
+      await this.addressSearch();
     }
     else {
-      try {
-        const data = await this.locationSearchService.searchLatitudeLongitude(
-          this.latitude.value, this.longitude.value);
-      }
-      catch (e) {
-        console.log(`search latitude/longitude error: ${JSON.stringify(e)}`);
-        this.latLongSearchError = true;
-      }
+      await this.latLongSearch();
     }
 
+  }
+
+  private async addressSearch() {
+    try {
+      const data = await this.locationSearchService.searchAddress(this.address.value);
+      console.log(data);
+    }
+    catch (e) {
+      console.log(`search address error ${e}`);
+      this.addressSearchError = true;
+    }
+  }
+
+  private async latLongSearch() {
+    try {
+      const data = await this.locationSearchService.searchLatitudeLongitude(
+        this.latitude.value, this.longitude.value);
+    }
+    catch (e) {
+      console.log(`search latitude/longitude error: ${JSON.stringify(e)}`);
+      this.latLongSearchError = true;
+    }
   }
 }
