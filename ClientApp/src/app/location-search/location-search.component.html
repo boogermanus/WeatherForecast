@@ -33,10 +33,16 @@
                 <label class="alert alert-danger" *ngIf="longitudeInvalid">Invalid Longtidue</label>
             </div>
         </div>
-        <div class="for-group row">
+        <div class="form-group row">
             <div class="col-sm-4">
                 <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Search</button>
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <label *ngIf="addressSearchError" class="alert alert-info">No results found for: '{{address.value}}'</label>
+        </div>
+        <div class="d-flex justify-content-center">
+            <label *ngIf="latLongSearchError" class="alert alert-info">No results found for Latitude: {{latitude.value}}, Longitude {{longitude.value}}</label>
         </div>
     </form>
 </div>

@@ -25,6 +25,9 @@ export class LocationSearchComponent implements OnInit {
       Validators.min(-180)
     ]));
 
+  public addressSearchError = false;
+  public latLongSearchError = false;
+
   public get getAddressInvalid(): boolean {
     return this.address.enabled && !this.address.valid && this.address.touched;
   }
@@ -37,7 +40,7 @@ export class LocationSearchComponent implements OnInit {
     return this.longitude.enabled && !this.longitude.valid && this.longitude.touched;
   }
   constructor(private formBuilder: FormBuilder,
-              private locationSearchService: LocationSearchService) {
+    private locationSearchService: LocationSearchService) {
     this.form = this.formBuilder.group({
       address: this.address,
       latitude: this.latitude,
@@ -55,7 +58,8 @@ export class LocationSearchComponent implements OnInit {
       this.address.enable();
       this.latitude.disable();
       this.longitude.disable();
-    } else {
+    }
+    else {
       this.address.disable();
       this.latitude.enable();
       this.longitude.enable();
@@ -63,7 +67,30 @@ export class LocationSearchComponent implements OnInit {
   }
 
   public async search(): Promise<void> {
-    const data = await this.locationSearchService.searchAddress(this.address.value);
-    console.log(data);
+
+    this.addressSearchError = false;
+    this.latLongSearchError = false;
+
+    if (!this.address.disabled) {
+      try {
+        const data = await this.locationSearchService.searchAddress(this.address.value);
+        console.log(data);
+      }
+      catch (e) {
+        console.log(`search address error ${e}`);
+        this.addressSearchError = true;
+      }
+    }
+    else {
+      try {
+        const data = await this.locationSearchService.searchLatitudeLongitude(
+          this.latitude.value, this.longitude.value);
+      }
+      catch (e) {
+        console.log(`search latitude/longitude error: ${JSON.stringify(e)}`);
+        this.latLongSearchError = true;
+      }
+    }
+
   }
 }

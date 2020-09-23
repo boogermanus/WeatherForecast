@@ -19,6 +19,7 @@ export class LocationSearchService {
 
   }
 
-  public searchLatitudeLongitude(latitude: number, longitude: number): void {
+  public searchLatitudeLongitude(latitude: number, longitude: number): Promise<IPoint> {
+    return this.weatherDataService.getPoints(latitude.toString(), longitude.toString());
   }
 }
