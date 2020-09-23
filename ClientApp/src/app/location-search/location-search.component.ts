@@ -95,7 +95,8 @@ export class LocationSearchComponent implements OnInit {
       data = await this.latLongSearch();
     }
 
-    this.router.navigate(['/forecast', data.cwa, data.radarStation, `${data.gridX},${data.girdY}`]);
+    console.log(data);
+    this.router.navigate(['/forecast', data.office, data.station, `${data.gridX},${data.girdY}`]);
   }
 
   private async addressSearch(): Promise<IPoint> {

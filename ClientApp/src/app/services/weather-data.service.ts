@@ -14,10 +14,12 @@ export class WeatherDataService {
     const data = await this.weatherApiService.get(`${this.POINTS_URL}/${latitude},${longitude}`);
 
     return Promise.resolve<IPoint>({
-      cwa: data.properties.cwa,
+      office: data.properties.cwa,
       gridX: data.properties.gridX,
       girdY: data.properties.gridY,
-      radarStation: data.properties.radarStation
+      station: data.properties.radarStation,
+      name: data.properties.relativeLocation.properties.city,
+      state: data.properties.relativeLocation.properties.state
     });
   }
 }

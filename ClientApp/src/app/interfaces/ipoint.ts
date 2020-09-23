@@ -1,6 +1,8 @@
 export interface IPoint {
-    cwa: string;
+    office: string;
     gridX: number;
     girdY: number;
-    radarStation: string;
+    station: string;
+    name: string;
+    state: string;
 }
