@@ -29,7 +29,7 @@ export class LocationSearchComponent implements OnInit {
   public latLongSearchError = false;
 
   public get getAddressInvalid(): boolean {
-    return this.address.enabled && !this.address.valid && this.address.touched;
+      return this.address.enabled && !this.address.valid && this.address.touched;
   }
 
   public get latitudeInvalid(): boolean {
@@ -55,15 +55,28 @@ export class LocationSearchComponent implements OnInit {
 
   public buttonToggle(event: MatButtonToggleChange): void {
     if (event.value === 'address') {
-      this.address.enable();
-      this.latitude.disable();
-      this.longitude.disable();
+      this.disableLocation();
     }
     else {
-      this.address.disable();
-      this.latitude.enable();
-      this.longitude.enable();
+      this.disableAddress();
     }
+  }
+
+  private disableLocation() {
+
+    this.latitude.setValue(0);
+    this.longitude.setValue(0);
+    this.address.enable();
+    this.address.markAsUntouched();
+    this.latitude.disable();
+    this.longitude.disable();
+  }
+
+  private disableAddress() {
+    this.address.setValue('');
+    this.address.disable();
+    this.latitude.enable();
+    this.longitude.enable();
   }
 
   public async search(): Promise<void> {
