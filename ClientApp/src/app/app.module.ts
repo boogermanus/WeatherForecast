@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { ForecastComponent } from './forecast/forecast.component';
+import { CurrentObservationsComponent } from './current-observations/current-observations.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ForecastComponent } from './forecast/forecast.component';
     NavMenuComponent,
     HomeComponent,
     LocationSearchComponent,
-    ForecastComponent
+    ForecastComponent,
+    CurrentObservationsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
