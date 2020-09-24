@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, convertToParamMap, RouterModule } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 import { ForecastComponent } from './forecast.component';
 
@@ -8,7 +10,12 @@ describe('ForecastComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ForecastComponent ]
+      declarations: [ ForecastComponent ],
+      providers: [{provide: ActivatedRoute, useValue: {snapshot: {params: {
+        office: 'test',
+        station: 'test',
+        grid: 'test,test',
+      }}}}]
     })
     .compileComponents();
   }));

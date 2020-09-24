@@ -15,19 +15,23 @@ export class LocationSearchComponent implements OnInit {
   public readonly ADDRESS_BUTTTON = 'address';
   public readonly SEARCH_ADDRESS_ERROR = 'search address error:';
   public readonly SEARCH_LATLONG_ERROR = 'search latitude/longitude error:';
+  public readonly VALID_LAT_MAX = 90;
+  public readonly VALID_LAT_MIN = -90;
+  public readonly VALID_LONG_MAX = 180;
+  public readonly VALID_LONG_MIN = -180;
   public form: FormGroup;
   public address: FormControl = new FormControl('', Validators.required);
   public latitude: FormControl = new FormControl(0,
     Validators.compose([
       Validators.required,
-      Validators.max(90),
-      Validators.min(-90)
+      Validators.max(this.VALID_LAT_MAX),
+      Validators.min(this.VALID_LAT_MAX)
     ]));
   public longitude: FormControl = new FormControl(0,
     Validators.compose([
       Validators.required,
-      Validators.max(180),
-      Validators.min(-180)
+      Validators.max(this.VALID_LONG_MAX),
+      Validators.min(this.VALID_LONG_MIN)
     ]));
 
   public addressSearchError = false;
