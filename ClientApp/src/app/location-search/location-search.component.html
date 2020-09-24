@@ -4,8 +4,8 @@
     </div>
     <div class="row">
         <div class="col-sm-4">
-            <mat-button-toggle-group value="address" (change)="buttonToggle($event)" >
-                <mat-button-toggle value="address">Address</mat-button-toggle>
+            <mat-button-toggle-group [value]="ADDRESS_BUTTTON" (change)="buttonToggle($event)" >
+                <mat-button-toggle [value]="ADDRESS_BUTTTON">Address</mat-button-toggle>
                 <mat-button-toggle value="latlong">Latitude/Longitude</mat-button-toggle>
             </mat-button-toggle-group>
         </div>

@@ -12,6 +12,7 @@ import { LocationSearchService } from '../services/location-search.service';
 })
 export class LocationSearchComponent implements OnInit {
 
+  public readonly ADDRESS_BUTTTON = 'address';
   public form: FormGroup;
   public address: FormControl = new FormControl('', Validators.required);
   public latitude: FormControl = new FormControl(0,
