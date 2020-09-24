@@ -13,6 +13,8 @@ import { LocationSearchService } from '../services/location-search.service';
 export class LocationSearchComponent implements OnInit {
 
   public readonly ADDRESS_BUTTTON = 'address';
+  public readonly SEARCH_ADDRESS_ERROR = 'search address error:';
+  public readonly SEARCH_LATLONG_ERROR = 'search latitude/longitude error:';
   public form: FormGroup;
   public address: FormControl = new FormControl('', Validators.required);
   public latitude: FormControl = new FormControl(0,
@@ -59,7 +61,7 @@ export class LocationSearchComponent implements OnInit {
   }
 
   public buttonToggle(event: MatButtonToggleChange): void {
-    if (event.value === 'address') {
+    if (event.value === this.ADDRESS_BUTTTON) {
       this.disableLocation();
     }
     else {
@@ -105,7 +107,7 @@ export class LocationSearchComponent implements OnInit {
       return await this.locationSearchService.searchAddress(this.address.value);
     }
     catch (e) {
-      console.log(`search address error ${e}`);
+      console.log(`${this.SEARCH_ADDRESS_ERROR} ${e}`);
       this.addressSearchError = true;
     }
   }
@@ -116,7 +118,7 @@ export class LocationSearchComponent implements OnInit {
         this.latitude.value, this.longitude.value);
     }
     catch (e) {
-      console.log(`search latitude/longitude error: ${JSON.stringify(e)}`);
+      console.log(`${this.SEARCH_LATLONG_ERROR} ${JSON.stringify(e)}`);
       this.latLongSearchError = true;
     }
   }
